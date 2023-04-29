@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	
+  <head>
+	<meta charset="UTF-8">
+		<title>Autonomous Catering Services Robot Control</title>
+		<style>
+		  h1 {
+			text-align: center;
+			border: 2px solid black;
+			padding: 10px;
+			font-size: 32px;
+		  }
+	
+		  button {
+			display: block;
+			margin: 0 auto;
+			font-size: 24px;
+			padding: 10px;
+			width: 200px;}
+
+		 .right {
+        text-align: right;
+      		
+		  }
+		</style>
+	  
+    <title>Autonomous Catering Services Robot Control</title>
+    <script src="https://unpkg.com/roslib@0.23.0/build/roslib.min.js"></script>
+
+    <script>
+      // Connect to ROS.
+      var ros = new ROSLIB.Ros({
+        url: 'ws://10.5.7.21:11311'
+      });
+
+      // Create a publisher for the robot's movement.
+      var movementPublisher = new ROSLIB.Topic({
+        ros: ros,
+        name: '/robot/movement',
+        messageType: 'std_msgs/String'
+      });
+
+      // Define functions for controlling the robot's movement.
+      function moveForward() {
+        var message = new ROSLIB.Message({
+          data: 'forward'
+        });
+        movementPublisher.publish(message);
+      }
+
+      function moveBackward() {
+        var message = new ROSLIB.Message({
+          data: 'backward'
+        });
+        movementPublisher.publish(message);
+      }
+
+      function turnLeft() {
+        var message = new ROSLIB.Message({
+          data: 'left'
+        });
+        movementPublisher.publish(message);
+      }
+
+      function turnRight() {
+        var message = new ROSLIB.Message({
+          data: 'right'
+        });
+        movementPublisher.publish(message);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Autonomous Catering Services Robot Control</h1>
+    <div style="text-align:left">
+      <button onclick="moveForward()">Move Forward</button>
+      <button onclick="moveBackward()">Move Backward</button>
+      <button onclick="turnLeft()">Turn Left</button>
+      <button onclick="turnRight()">Turn Right</button>
+    </div>
+    <div class="right">
+      <br>
+      <button onclick="table1()">Table 1</button>
+      <button onclick="table2()">Table 2</button>
+      <button onclick="table3()">Table 3</button>
+      <button onclick="table4()">Table 4</button>
+      <br>
+      <button onclick="home()">Home</button>
+    </div>
+  </body>
+</html>
